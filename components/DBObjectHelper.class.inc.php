@@ -22,15 +22,18 @@ use \MetaModel;
 abstract class DBObjectHelper {
 
 	/**
-	 * Gets an array containing the object values
+	 * Gets an array containing the object values (either all or based on a given list).
+	 * Automatically adds 'id'.
 	 *
 	 * @param \DBObject $oObject iTop object
+	 * @param \String[]|null $aListOfAttributes List of attributes (filter)
 	 *
 	 * @return \Array Hash table of object.
 	 */
-	public function GetValuesAsArray(DBObject $oObject) {
+	public function GetValuesAsArray(DBObject $oObject, ?Array $aListOfAttributes = null) {
 		
-		$aAttributeList = Metamodel::GetAttributesList(get_class($oObject));
+		$aAttributeList = ($aListOfAttributes === null ? Metamodel::GetAttributesList(get_class($oObject)) : $aListOfAttributes);
+		
 		$aAttributeList[] = 'id';
 		
 		$aAttributeValues = [];

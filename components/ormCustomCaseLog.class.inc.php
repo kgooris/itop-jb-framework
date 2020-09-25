@@ -23,7 +23,7 @@ use \UserRights;
 
 if(class_exists('jb_itop_extensions\components\ormCustomCaseLog') == false) {
 
-	class ormCustomCaseLog extends \ormCaseLog {
+	class ormCustomCaseLog extends ormCaseLog {
 
 		/**
 		 * Add a new entry to the log or merge the given text into the currently modified entry 
@@ -98,7 +98,7 @@ if(class_exists('jb_itop_extensions\components\ormCustomCaseLog') == false) {
 		 *
 		 * @return void
 		 */
-		public function AddLogEntriesFromCaseLog(\ormCaseLog $oSourceCaseLog) {
+		public function AddLogEntriesFromCaseLog(ormCaseLog $oSourceCaseLog) {
 			
 			foreach($oSourceCaseLog->GetAsArray() as $aEntry) {
 				
