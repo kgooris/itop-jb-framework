@@ -3,12 +3,21 @@
 /**
  * @copyright   Copyright (C) 2019-2020 Jeffrey Bostoen
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2020-10-30 07:25:49
+ * @version     2020-10-30 13:15:05
  *
  * Definition of CMDBChangeHelper
  */
 
 namespace jb_itop_extensions\components;
+
+// iTop internals
+use \DBSearch;
+use \CMDBObjectSet;
+use \MetaModel;
+
+// iTop classes
+use \CMDBChange;
+
 
 /**
  * Class CMDBChangeHelper
@@ -22,16 +31,16 @@ abstract class CMDBChangeHelper {
 	 *
 	 * @return void
 	 */
-	public static function DeleteChangeOperations(\CMDBChange $oChange) {
+	public static function DeleteChangeOperations(CMDBChange $oChange) {
 		
-		$aCachedChangeOpClasses = \MetaModel::EnumChildClasses('CMDBChangeOp');
+		$aCachedChangeOpClasses = MetaModel::EnumChildClasses('CMDBChangeOp');
 		
 		// Re-query to delete final classes (so all object details, also the data stored in parent class CMDBChangeOp)
 		foreach($aCachedChangeOpClasses as $sFinalClass) {
 			
 			// Not change_id
-			$oFilter_ChangeOps = \DBSearch::FromOQL('SELECT '.$sFinalClass.' WHERE change = '.$oChange->GetKey());
-			$oSet_ChangeOps = new \CMDBObjectSet($oFilter_ChangeOps);
+			$oFilter_ChangeOps = DBSearch::FromOQL('SELECT '.$sFinalClass.' WHERE change = '.$oChange->GetKey());
+			$oSet_ChangeOps = new CMDBObjectSet($oFilter_ChangeOps);
 			
 			while($oChangeOp = $oSet_ChangeOps->Fetch()) {
 				$oChangeOp->DBDelete();
@@ -48,7 +57,7 @@ abstract class CMDBChangeHelper {
 	 *
 	 * @return void
 	 */
-	public static function DeleteChange(\CMDBChange $oChange) {
+	public static function DeleteChange(CMDBChange $oChange) {
 		
 		// 1) Delete all CMDBChangeOp (Change Operations)
 		DeleteChangeOperations($oChange);

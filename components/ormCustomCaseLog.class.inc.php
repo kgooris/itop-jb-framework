@@ -3,7 +3,7 @@
 /**
  * @copyright   Copyright (C) 2019-2020 Jeffrey Bostoen
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2020-10-30 07:25:49
+ * @version     2020-10-30 13:15:05
  *
  * Custom version of ormCaseLog.
  * - Extended AddLogEntry() to support on_behalf_of_user_id (rather than just 'on_behalf_of'). 
@@ -140,7 +140,7 @@ if(class_exists('jb_itop_extensions\components\ormCustomCaseLog') == false) {
 			});
 						
 			// m_aIndex AND m_sLog both need to be updated, hence this trick.
-			$oCustomCaseLog = new \jb_itop_extensions\components\ormCustomCaseLog();
+			$oCustomCaseLog = new ormCustomCaseLog();
 			
 		// The order above might be descending, as wanted.
 		// However, if that item gets added first, iTop will add the subsequent (older) issues on top of that entry again.

@@ -3,7 +3,7 @@
 /**
  * @copyright   Copyright (C) 2019-2020 Jeffrey Bostoen
  * @license     See license.md
- * @version     2020-10-30 07:25:49
+ * @version     2020-10-30 13:15:05
  *
  * iTop front-end ajax handler. Based on pages/ajax.searchform.php
  *
@@ -35,14 +35,12 @@ require_once(APPROOT.'/application/wizardhelper.class.inc.php');
 
 try
 {
-	if (LoginWebPage::EXIT_CODE_OK != LoginWebPage::DoLoginEx(null /* any portal */, false, LoginWebPage::EXIT_RETURN))
-	{
+	if (LoginWebPage::EXIT_CODE_OK != LoginWebPage::DoLoginEx(null /* any portal */, false, LoginWebPage::EXIT_RETURN)) {
 		throw new SecurityException('You must be logged in');
 	}
 
 	$sQuery = utils::ReadParam('oql', '', false, 'raw_data');
-	if (!$sQuery)
-	{
+	if (!$sQuery) {
 		throw new AjaxSearchException("Invalid query (empty OQL)", 400);
 	}
 

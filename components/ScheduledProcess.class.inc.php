@@ -3,7 +3,7 @@
 /**
  * @copyright   Copyright (C) 2019-2020 Jeffrey Bostoen
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2020-10-30 07:25:49
+ * @version     2020-10-30 13:15:05
  *
  * Definition of ScheduledProcess
  */
@@ -12,6 +12,7 @@ namespace jb_itop_extensions\components;
 
 use \CoreUnexpectedValue;
 use \MetaModel;
+use \utils;
 
 /**
  * Class ScheduledProcess
@@ -155,11 +156,10 @@ class ScheduledProcess {
 	 * @param \String $sMessage Message to put in the trace log (CRON output)
 	 * @param \String $sType Type of message. Possible values: info, error
 	 *
-	 * @uses \jb_itop_extensions\components\TraceLog::Trace()
 	 */
 	protected function Trace($sMessage, $sType = 'info') {
 		
-		\jb_itop_extensions\components\TraceLog::Trace($sMessage, $sType, \utils::GetCurrentModuleSetting('debug_level', 'info'));
+		TraceLog::Trace($sMessage, $sType, utils::GetCurrentModuleSetting('debug_level', 'info'));
 		
 	}
 	
