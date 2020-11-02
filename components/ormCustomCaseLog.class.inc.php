@@ -3,7 +3,7 @@
 /**
  * @copyright   Copyright (C) 2019-2020 Jeffrey Bostoen
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2020-10-30 13:15:05
+ * @version     2020-11-02 19:47:29
  *
  * Custom version of ormCaseLog.
  * - Extended AddLogEntry() to support on_behalf_of_user_id (rather than just 'on_behalf_of'). 
@@ -33,8 +33,7 @@ if(class_exists('jb_itop_extensions\components\ormCustomCaseLog') == false) {
 		 * @param integer|null $iOnBehalfOfUserId Custom specified user ID
 		 * @param String $sDateTime Time sent
 		 */
-		public function AddLogEntry($sText, $sOnBehalfOf = '', $iOnBehalfOfUserId = null, $sDateTime = '')
-		{
+		public function AddLogEntry($sText, $sOnBehalfOf = '', $iOnBehalfOfUserId = null, $sDateTime = '') {
 			$sText = HTMLSanitizer::Sanitize($sText);
 			$sDateTime = ($sDateTime == '' ? date(AttributeDateTime::GetInternalFormat()) : date(AttributeDateTime::GetInternalFormat(), strtotime($sDateTime)));
 			
@@ -42,7 +41,7 @@ if(class_exists('jb_itop_extensions\components\ormCustomCaseLog') == false) {
 				$sOnBehalfOf = UserRights::GetUserFriendlyName();
 				$iUserId = UserRights::GetUserId();
 			}
-			if( $iOnBehalfOfUserId !== null ) {
+			if($iOnBehalfOfUserId !== null) {
 				$iUserId = $iOnBehalfOfUserId;
 			}
 			else {

@@ -3,14 +3,14 @@
 /**
  * @copyright   Copyright (C) 2019-2020 Jeffrey Bostoen
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2020-10-30 13:15:05
+ * @version     2020-11-02 19:47:29
  *
  * iTop module definition file
  */
 
 SetupWebPage::AddModule(
         __FILE__, // Path to the current file, all other file names are relative to the directory containing this file
-        'jb-framework/2.6.201030',
+        'jb-framework/2.6.201102',
         array(
                 // Identification
                 //

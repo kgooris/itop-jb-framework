@@ -3,13 +3,17 @@
 /**
  * @copyright   Copyright (C) 2019-2020 Jeffrey Bostoen
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2020-10-30 13:15:05
+ * @version     2020-11-02 19:47:29
  *
  * Definition of ScheduledProcess
  */
 
 namespace jb_itop_extensions\components;
 
+// generic
+use \DateTime;
+
+// iTop internals
 use \CoreUnexpectedValue;
 use \MetaModel;
 use \utils;
@@ -23,6 +27,16 @@ class ScheduledProcess {
 	 * @var \String MODULE_CODE Identifier of the extension (used in iTop configuration settings). Should be redefined in subclasses.
 	 */
 	const MODULE_CODE = 'jb-scheduled-process---should-be-overwritten';
+
+	const KEY_MODULE_SETTING_ENABLED = 'enabled';
+	const KEY_MODULE_SETTING_DEBUG = 'debug';
+	const KEY_MODULE_SETTING_WEEKDAYS = 'week_days';
+	const KEY_MODULE_SETTING_TIME = 'time';
+
+	const DEFAULT_MODULE_SETTING_ENABLED = true;
+	const DEFAULT_MODULE_SETTING_DEBUG = false;
+	const DEFAULT_MODULE_SETTING_WEEKDAYS = 'monday, tuesday, wednesday, thursday, friday, saturday, sunday';
+	const DEFAULT_MODULE_SETTING_TIME = '03:00';
 	
 	/**
 	 * Constructor.
@@ -97,7 +111,7 @@ class ScheduledProcess {
 	 * @inheritdoc
 	 *
 	 * @throws \CoreException
-	 * @throws CoreUnexpectedValue
+	 * @throws \CoreUnexpectedValue
 	 * @throws \MissingQueryArgument
 	 * @throws \MySQLException
 	 * @throws \MySQLHasGoneAwayException
@@ -157,7 +171,7 @@ class ScheduledProcess {
 	 * @param \String $sType Type of message. Possible values: info, error
 	 *
 	 */
-	protected function Trace($sMessage, $sType = 'info') {
+	public function Trace($sMessage, $sType = 'info') {
 		
 		TraceLog::Trace($sMessage, $sType, utils::GetCurrentModuleSetting('debug_level', 'info'));
 		
