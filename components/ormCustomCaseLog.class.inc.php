@@ -28,6 +28,10 @@ if(class_exists('jb_itop_extensions\components\ormCustomCaseLog') == false) {
 		/**
 		 * Add a new entry to the log or merge the given text into the currently modified entry 
 		 * and updates the internal index
+		 *
+		 * Combodo added their own $iOnBehalfOfUserId parameter in iTop 3.0, but there's no $sDateTime yet.
+		 * However, this method is at the moment still compatible with iTop 2.7
+		 *
 		 * @param string $sText The text of the new entry
 		 * @param string $sOnBehalfOf  Custom specified user name (for example: "from:" in the Mail to Ticket Automation extension)
 		 * @param integer|null $iOnBehalfOfUserId Custom specified user ID
@@ -43,6 +47,13 @@ if(class_exists('jb_itop_extensions\components\ormCustomCaseLog') == false) {
 			}
 			if($iOnBehalfOfUserId !== null) {
 				$iUserId = $iOnBehalfOfUserId;
+				
+				/** @var \User $oUser */
+				$oUser = MetaModel::GetObject('User', $iUserId, false, true);
+				if ($oUser !== null && $sOnBehalfOf === '') {
+					$sOnBehalfOf = $oUser->GetFriendlyName();
+				}
+				
 			}
 			else {
 				$iUserId = 0;
