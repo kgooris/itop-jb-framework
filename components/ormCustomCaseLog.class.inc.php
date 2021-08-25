@@ -20,6 +20,7 @@ use \AttributeDateTime;
 use \ormCaseLog;
 use \HTMLSanitizer;	   
 use \UserRights;
+use \MetaModel;
 
 if(class_exists('jb_itop_extensions\components\ormCustomCaseLog') == false) {
 
